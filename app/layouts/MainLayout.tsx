@@ -1,25 +1,19 @@
-"use client";
+import React from "react"
+import SideNavMain from "./includes/SideNavMain"
+import TopNav from "./includes/TopNav"
+import { usePathname } from "next/navigation"
 
-import { usePathname } from "next/navigation";
-import TopNav from "./includes/TopNav";
+export default function MainLayout({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname()
 
-type Props = {
-	children: React.ReactNode;
-};
-
-export default function MainLayout({
-    children
-}:Props) {
-	const pathname = usePathname();
-
-	return (
-		<>
-        <TopNav />
-			<div
-				className={`flex justify-between mx-auto w-full lg:px-2.5 px-0 ${
-					pathname === "/" ? "max-w-[1140px]" : ""
-				}`}
-			>{children}</div>
-		</>
-	);
+    return (
+      	<>
+			<TopNav/>
+			<div className={`flex justify-between mx-auto w-full lg:px-2.5 px-0 ${pathname == '/' ? 'max-w-[1140px]' : ''}`}>
+				<SideNavMain />
+				{children}
+			</div>
+      	</>
+    )
 }
+  
